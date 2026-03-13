@@ -7,4 +7,90 @@
 body {
   min-height: 100vh;
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  position: relative;
+}
+
+.board-result {
+  margin-bottom: 30px;
+}
+
+.board-players {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    background-color: #202020;
+    padding: 8px;
+    border-radius: 4px;
+    color: #fff;
+
+    &.turn {
+      border-bottom: 5px solid chocolate;
+    }
+  }
+}
+
+.result-text {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 3rem;
+}
+
+.new-game-btn {
+  background-color: #323232;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #fff;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  grid-template-rows: repeat(1, 120px);
+}
+
+.board button[data-column] {
+  background-color: #ccc;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+
+  &:hover {
+    background-color: rgb(167, 169, 170);
+  }
+}
+
+.row:not(:last-child) {
+  border-bottom: 5px solid #202020;
+}
+
+.row button[data-column]:not(:last-child) {
+  border-right: 5px solid #202020;
+}
+
+.win-line {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: #202020;
 }

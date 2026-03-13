@@ -10,6 +10,7 @@ const GameController = (() => {
       winType: null,
       text: null,
       winIndex: null,
+      isRunning: true,
     },
 
     playerX: {
@@ -35,6 +36,7 @@ const GameController = (() => {
         winType: null,
         text: null,
         winIndex: null,
+        isRunning: true,
       };
       this.playerX.turn = true;
       this.player0.turn = false;
@@ -64,7 +66,7 @@ const GameController = (() => {
     },
 
     makeMove(row, col) {
-      if (this.board[row][col] && this.result.winner) return;
+      if (this.board[row][col] || this.result.winner) return;
 
       const turnPlayer = this.turnPlayer;
 
@@ -82,6 +84,8 @@ const GameController = (() => {
       } else {
         this.result.text = `Draw!`;
       }
+
+      this.result.isRunning = false;
     },
 
     checkWin(player) {
@@ -123,4 +127,83 @@ const GameController = (() => {
       }
     },
   };
+
+  return gameState;
 })();
+
+const UIController = (() => {
+  const boardEl = document.querySelector('.board');
+  const playerXEl = document.querySelector('.player-x');
+  const player0El = document.querySelector('.player-0');
+  const playerXScoreEl = playerXEl.querySelector('.score-x');
+  const player0ScoreEl = player0El.querySelector('.score-0');
+  const resultTextEl = document.querySelector('.result-text');
+  const newGameBtn = document.querySelector('.new-game-btn');
+
+  function gameInit() {
+    newGameBtn.addEventListener('click', handleRestartRound);
+    newGameBtn.classList.add('hidden');
+    playerXEl.classList.add('turn');
+  }
+
+  const gameState = GameController;
+  boardEl.addEventListener('click', handleCellClick);
+
+  function handleRestartRound() {
+    console.log('e');
+    gameState.restartRound();
+    newGameBtn.classList.add('hidden');
+    boardEl
+      .querySelectorAll('[data-column]')
+      .forEach((col) => (col.textContent = ''));
+    resultTextEl.textContent = '';
+    playerXEl.classList.add('turn');
+    player0El.classList.remove('turn');
+  }
+
+  function handleCellClick(e) {
+    if (!e.target.dataset.column) return;
+
+    const row = Number(e.target.closest('.row').dataset.row);
+    const col = Number(e.target.dataset.column);
+
+    if (!gameState.result.isRunning) return;
+
+    gameState.makeMove(row, col);
+
+    updateDisplay(row, col);
+  }
+
+  function handleTurnPlayer() {
+    if (gameState.turnPlayer.type === 'X') {
+      playerXEl.classList.add('turn');
+      player0El.classList.remove('turn');
+    } else {
+      playerXEl.classList.remove('turn');
+      player0El.classList.add('turn');
+    }
+  }
+
+  function updateFinishGameDisplay() {
+    if (!gameState.result.isRunning) {
+      resultTextEl.textContent = gameState.result.text;
+      newGameBtn.classList.toggle('hidden');
+      playerXScoreEl.textContent = gameState.playerX.score;
+      player0ScoreEl.textContent = gameState.player0.score;
+    }
+  }
+
+  function updateDisplay(row, col) {
+    const text = gameState.board[row][col];
+    boardEl.querySelector(
+      `.row[data-row='${row}'] button[data-column='${col}']`
+    ).textContent = text;
+
+    updateFinishGameDisplay();
+    handleTurnPlayer();
+  }
+
+  return gameInit;
+})();
+
+UIController();
