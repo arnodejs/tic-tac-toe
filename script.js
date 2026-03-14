@@ -80,7 +80,6 @@ const GameController = (() => {
         player.score += 1;
         this.result.winner = player;
         this.result.text = `${player.type} winner!`;
-        console.log(this.result);
       } else {
         this.result.text = `Draw!`;
       }
@@ -139,6 +138,7 @@ const UIController = (() => {
   const player0ScoreEl = player0El.querySelector('.score-0');
   const resultTextEl = document.querySelector('.result-text');
   const newGameBtn = document.querySelector('.new-game-btn');
+  const line = document.querySelector('.win-line line');
 
   function gameInit() {
     newGameBtn.addEventListener('click', handleRestartRound);
@@ -150,7 +150,6 @@ const UIController = (() => {
   boardEl.addEventListener('click', handleCellClick);
 
   function handleRestartRound() {
-    console.log('e');
     gameState.restartRound();
     newGameBtn.classList.add('hidden');
     boardEl
@@ -159,6 +158,16 @@ const UIController = (() => {
     resultTextEl.textContent = '';
     playerXEl.classList.add('turn');
     player0El.classList.remove('turn');
+    resetLine();
+  }
+
+  function resetLine() {
+    line.setAttribute('x1', `0`);
+    line.setAttribute('y1', '0');
+    line.setAttribute('x2', `0`);
+    line.setAttribute('y2', '0');
+    line.style.zIndex = -1;
+    line.parentElement.style.zIndex = -1;
   }
 
   function handleCellClick(e) {
@@ -190,6 +199,7 @@ const UIController = (() => {
       newGameBtn.classList.toggle('hidden');
       playerXScoreEl.textContent = gameState.playerX.score;
       player0ScoreEl.textContent = gameState.player0.score;
+      winLine(gameState.result.winType, gameState.result.winIndex);
     }
   }
 
@@ -201,6 +211,39 @@ const UIController = (() => {
 
     updateFinishGameDisplay();
     handleTurnPlayer();
+  }
+
+  function moveLine(x1, x2, y1, y2) {
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+
+    line.style.zIndex = 1;
+    line.parentElement.style.zIndex = 1;
+  }
+
+  function winLine(type, index) {
+    switch (type) {
+      case 'vertical':
+        const verticalPos = index * 120 + 120 / 2;
+
+        moveLine(verticalPos, verticalPos, 0, 370);
+        break;
+      case 'horizontal':
+        const horizontalPos = index * 125 + 120 / 2;
+
+        moveLine(0, 360, horizontalPos, horizontalPos);
+        break;
+      case 'diagonal-left':
+        moveLine(0, 360, 0, 370);
+        break;
+      case 'diagonal-right':
+        moveLine(360, 0, 0, 370);
+        break;
+      default:
+        return;
+    }
   }
 
   return gameInit;

@@ -10,17 +10,20 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #202020;
+  color: #fff;
 }
 
 .board {
   position: relative;
+  overflow: hidden;
 }
 
-.board-result {
+.game-result {
   margin-bottom: 30px;
 }
 
-.board-players {
+.game-players {
   display: flex;
   justify-content: space-between;
 
@@ -31,7 +34,7 @@ body {
     color: #fff;
 
     &.turn {
-      border-bottom: 5px solid chocolate;
+      border-bottom: 5px solid rgb(248, 52, 52);
     }
   }
 }
@@ -66,7 +69,7 @@ body {
 }
 
 .board button[data-column] {
-  background-color: #ccc;
+  background-color: #cecece;
   border: none;
   cursor: pointer;
   display: flex;
@@ -89,8 +92,7 @@ body {
 
 .win-line {
   position: absolute;
+  top: 0;
   display: block;
-  width: 100%;
-  height: 4px;
-  background-color: #202020;
+  z-index: -1;
 }
