@@ -13,3 +13,122 @@ body {
   background-color: #202020;
   color: #fff;
 }
+
+.app {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  padding-inline: 16px;
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.result {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 32px;
+}
+
+.player-info {
+  background-color: #202020;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 70%;
+  background-color: #111010;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 0 auto;
+  margin-bottom: 32px;
+}
+
+.player-group {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  gap: 16px;
+}
+
+.player-label {
+  text-wrap: nowrap;
+}
+
+.player-input {
+  display: block;
+  padding: 8px 12px;
+  border: none;
+  background-color: #313131;
+  color: #fff;
+  border: 1px solid #000000;
+  border-radius: 8px;
+}
+
+.board {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  gap: 12px;
+}
+
+.board-column {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  aspect-ratio: 1 / 1;
+  color: #313131;
+
+  &::before {
+    content: 'X';
+    opacity: 0.3;
+    visibility: hidden;
+  }
+
+  &:hover {
+    background-color: #b8b8b8;
+    cursor: pointer;
+  }
+
+  &:hover::before {
+    visibility: visible;
+  }
+
+  &.column-o {
+    color: rgb(136, 136, 136);
+  }
+
+  &.win {
+    background-color: khaki;
+  }
+}
+
+.new-round-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+#new-round {
+  display: block;
+  padding: 8px 12px;
+  border: none;
+  background-color: #313131;
+  color: #fff;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #000000;
+  }
+}
+
+.hidden {
+  display: none;
+}

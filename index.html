@@ -7,5 +7,49 @@
     <title>Tic Tac Toe | Game</title>
     <script src="script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <div class="app">
+      <h1 class="title">Tic Tac Toe</h1>
+      <p class="result">It's a tie!</p>
+
+      <div class="player-info">
+        <p class="player-group">
+          <label class="player-label" for="playerX">Player 1</label>
+          <input
+            id="playerX"
+            class="player-input"
+            type="text"
+            value="Player X"
+          />
+        </p>
+        <p class="player-group">
+          <label class="player-label" for="playerO">Player 2</label>
+          <input
+            id="playerO"
+            class="player-input"
+            type="text"
+            value="Player O"
+          />
+        </p>
+        <p class="player-group">
+          <span>Turn</span>
+          <span id="player-turn">Player X</span>
+        </p>
+      </div>
+      <div class="board">
+        <button class="board-column" data-row="0" data-col="0"></button>
+        <button class="board-column" data-row="0" data-col="1"></button>
+        <button class="board-column" data-row="0" data-col="2"></button>
+        <button class="board-column" data-row="1" data-col="0"></button>
+        <button class="board-column" data-row="1" data-col="1"></button>
+        <button class="board-column" data-row="1" data-col="2"></button>
+        <button class="board-column" data-row="2" data-col="0"></button>
+        <button class="board-column" data-row="2" data-col="1"></button>
+        <button class="board-column" data-row="2" data-col="2"></button>
+      </div>
+      <div class="new-round-btn">
+        <button id="new-round">New round</button>
+      </div>
+    </div>
+  </body>
 </html>
