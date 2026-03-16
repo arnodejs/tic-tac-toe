@@ -10,11 +10,13 @@
   <body>
     <div class="app">
       <h1 class="title">Tic Tac Toe</h1>
-      <p class="result">It's a tie!</p>
+      <p class="result"></p>
 
       <div class="player-info">
         <p class="player-group">
-          <label class="player-label" for="playerX">Player 1</label>
+          <label class="player-label" for="playerX"
+            >Player X: <span class="score" id="score-x">0</span></label
+          >
           <input
             id="playerX"
             class="player-input"
@@ -23,7 +25,9 @@
           />
         </p>
         <p class="player-group">
-          <label class="player-label" for="playerO">Player 2</label>
+          <label class="player-label" for="playerO"
+            >Player O: <span class="score" id="score-o">0</span></label
+          >
           <input
             id="playerO"
             class="player-input"
@@ -33,7 +37,7 @@
         </p>
         <p class="player-group">
           <span>Turn</span>
-          <span id="player-turn">Player X</span>
+          <span id="player-turn">X turn</span>
         </p>
       </div>
       <div class="board">

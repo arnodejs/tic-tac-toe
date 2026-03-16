@@ -38,7 +38,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 70%;
   background-color: #111010;
   padding: 16px;
   border-radius: 8px;
@@ -55,6 +54,14 @@ body {
 
 .player-label {
   text-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.score {
+  font-size: 1.2rem;
 }
 
 .player-input {
@@ -74,6 +81,7 @@ body {
 }
 
 .board-column {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -86,8 +94,10 @@ body {
 
   &::before {
     content: 'X';
+    position: absolute;
     opacity: 0.3;
     visibility: hidden;
+    z-index: -1;
   }
 
   &:hover {
